@@ -44,10 +44,13 @@ page_ref = args.page_reference
 
 #Read and parse GABC
 data = common.read_gabc(input_file)
-gabcdata = data['gabc_code']
+#gabcdata = data['gabc_code']
+
+# Add metadata
 
 #Create main table
-lycsv_table = common.gabc2table(gabcdata)
+#lycsv_table = common.gabc2table(gabcdata)
+lycsv_table = common.gabc2table(data)
 
 #Add GABC note shapes
 lycsv_table = common.gabcnoteshapes(lycsv_table)
@@ -62,6 +65,7 @@ lycsv_table = common.gabc2midi_table(lycsv_table)
 #Add Lily Values
 lycsv_table = common.midi2ly_table(lycsv_table)
 
+
 #Write file
 ##TODO Temporary
 #with open("test2.csv", 'w', newline='') as testfile:
@@ -74,8 +78,6 @@ lycsv_table = common.midi2ly_table(lycsv_table)
 
 #
 #Write file
-#for row in range(len(lycsv_table)):
-#  print(lycsv_table[row])
 with open(output_file, 'w', newline='') as csvfile:
     csv_writer = csv.writer(csvfile, delimiter='\t')
     csv_writer.writerows(lycsv_table)
